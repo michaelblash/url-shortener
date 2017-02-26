@@ -2,9 +2,6 @@
 <html>
 <head>
   <script src="static/script.js"></script>
-  <script>
-
-  </script>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <title>URL Shortener</title>
 </head>
@@ -32,8 +29,8 @@
     event.preventDefault();
     var xhr = new XMLHttpRequest();
     var body = "url=" + encodeURIComponent(form.url.value);
-//    xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
     xhr.open("POST", "/", true);
+    xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
     xhr.send(body);
     xhr.onreadystatechange = function() {
       if (this.readyState != 4) return;
