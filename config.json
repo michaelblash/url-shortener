@@ -1,0 +1,6 @@
+{
+  "port": 3000,
+  "staticPrefix": "static",
+  "rootPath": "",
+  "domain": "http://localhost:3000"
+}
