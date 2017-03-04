@@ -1,7 +1,12 @@
-
+/**
+ * NOT FOR PRODUCTION!!!
+ * For production use some other module that implements
+ * proper database work. This one is only for demo purposes
+ * to make the development easier.
+ */
 
 var db = {
-  '12345': 'https://nodejs.org/'
+  'node': 'https://nodejs.org/'
 };
 
 exports.shorten = function(longURL, callback) {

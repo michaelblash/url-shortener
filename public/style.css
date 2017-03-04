@@ -1,0 +1,41 @@
+body {
+  font-family: sans-serif;
+}
+
+#content-wrap {
+  width: 960px;
+  margin: 0 auto;
+  border: 1px solid #CCC;
+}
+
+#page-header {
+  margin: 20px;
+  border-bottom: 1px dotted #CCC;
+}
+
+h1 {
+  text-align: center;
+}
+
+.form-set {
+  width: 575px;
+  height: 80px;
+  margin: 10px auto;
+  border: 5px solid #CCC;
+  padding: 20px;
+}
+
+.result {
+  margin: 10px;
+  padding: 10px;
+}
+
+.result-correct {
+  border: 2px solid #090;
+  background-color: #CFC;
+}
+
+.result-error {
+  border: 2px solid #900;
+  background-color: #FCC;
+}

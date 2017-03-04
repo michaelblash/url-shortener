@@ -3,6 +3,7 @@ var qs = require('querystring');
 var staticServer = require('./lib/static_server.js');
 var shortener = require('./shortener');
 
+// Define a router structure with some templates
 module.exports = function(config) {
   var routes = {
     GET: {
@@ -27,7 +28,6 @@ module.exports = function(config) {
         req.on('data', function(chunk) { body += chunk; });
         req.on('end', function() {
           var obj = qs.parse(body);
-          console.log(obj.url);
           shortener.shorten(obj.url, function(err, result) {
             res.end(config.domain + '/' + result);
           });
