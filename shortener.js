@@ -16,9 +16,12 @@ exports.shorten = function(longURL, callback) {
 };
 
 exports.resolve = function(shortURL, callback) {
+  var longURL;
   try {
-    callback(null, db[shortURL]);
+    longURL = db[shortURL];
   } catch (e) {
     callback(e);
+    return;
   }
+  callback(null, longURL);
 };

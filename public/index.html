@@ -1,7 +1,8 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
   <link rel="stylesheet" type="text/css" href="static/style.css">
+  <script type="text/javascript" src="static/script.js"></script>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <title>URL Shortener</title>
 </head>
@@ -21,38 +22,67 @@
       </div>
     </div>
   </div>
-  <script>
+  <script defer>
+  
   var formSet = document.getElementById("main-form");
   var form = formSet.getElementsByTagName("form")[0];
-  var result = formSet.querySelector(".result");
-  form.addEventListener("submit", function(event) {
-    event.preventDefault();
-    var xhr = new XMLHttpRequest();
-    var body = "url=" + encodeURIComponent(form.url.value);
-    xhr.open("POST", "/", true);
-    xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
-    xhr.send(body);
-    xhr.onreadystatechange = function() {
-      if (this.readyState != 4) return;
-      if (this.status != 200) {
-        showError("Error! Please try again later.");
+  var resultField = formSet.querySelector(".result");
+
+  form.onsubmit = function(event) {
+    event = event || window.event;
+    if(event.preventDefault) event.preventDefault();
+    else event.returnValue = false;
+    var inputVal = this.url.value;
+
+    // check if IE9-
+    if (!("required" in document.createElement("input"))) {
+      if (!inputVal.length) {
+        alert("Please fill out the field.");
         return;
       }
-      showResult(xhr.responseText);
-    };
-  });
+      if (!checkUrl(inputVal)) {
+        alert("Please enter a URL.");
+        return;
+      }
+    }
 
-  function showError(text) {
-    result.classList.add("result-error");
-    result.classList.remove("result-correct");
-    result.getElementsByTagName("span")[0].textContent = text;
+    ajax({url: inputVal}, function(err, res) {
+      if (err) {
+        showResult(err.message, resultField, "error");
+        return;
+      }
+      showResult(res, resultField, "correct");
+    });
+  };
+ 
+// show correct/error result with a proper styling
+  function showResult(text, result, stylingClass) {
+    var add = "", rem = "";
+    if (stylingClass == "error") {
+      add = "error";
+      rem = "correct";
+    }
+    if (stylingClass == "correct") {
+      add = "correct";
+      rem = "error";
+    }
+    var resultSpan = result.getElementsByTagName("span")[0];
+    if ("textContext" in resultSpan)
+      resultSpan.textContext = text;
+    else if ("innerText" in resultSpan)
+      resultSpan.innerText = text;
+    // check if IE9-
+    if (result.classList) {
+      result.classList.add("result-" + add);
+      result.classList.remove("result-" + rem);
+    } else { // it's IE9-
+      if (!~result.className.indexOf("result-" + add)) {
+        result.className = result.className.replace(" result-" + rem, "");
+        result.className += " result-" + add;
+      }
+    }
   }
 
-  function showResult(text) {
-    result.classList.add("result-correct");
-    result.classList.remove("result-error");
-    result.getElementsByTagName("span")[0].textContent = text;
-  }
   </script>
 </body>
 </html>

@@ -2,8 +2,9 @@ var path = require('path');
 var qs = require('querystring');
 var staticServer = require('./lib/static_server.js');
 var shortener = require('./shortener');
+var utils = require('./lib/utils.js');
 
-// Define a router structure with some templates
+// Define a router structure with templates
 module.exports = function(config) {
   var routes = {
     GET: {
@@ -13,11 +14,13 @@ module.exports = function(config) {
       '/:short': function(req, res, short) {
         shortener.resolve(short, function(err, result) {
           if (err || !result) {
+            // send a 404 page since there is no file named 'nothing'
             staticServer.serveFileSafe('nothing', res);
             return;
           }
-          res.setHeader('Content-Type', 'text/html; charset=UTF-8');
-          res.end(result);
+          res.statusCode = 303;
+          res.setHeader('Location', utils.encodeURIByChar(result));
+          res.end();
         });
       }
     },
@@ -29,7 +32,9 @@ module.exports = function(config) {
         req.on('end', function() {
           var obj = qs.parse(body);
           shortener.shorten(obj.url, function(err, result) {
-            res.end(config.domain + '/' + result);
+          res.setHeader('connection', 'close');
+          res.setHeader('Access-Control-Allow-Origin', '*');
+          res.end(config.domain + '/' + result);
           });
         });
       }
@@ -37,7 +42,7 @@ module.exports = function(config) {
   };
 
   routes.GET[
-    path.normalize('/' + config.staticPrefix + '/::path')
+    '/' + config.staticPrefix + '/::path'
     ] = function(req, res, filePath) {
     staticServer.serveFileSafe(path.join(config.rootPath, filePath), res);
   };
