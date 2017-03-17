@@ -1,6 +1,6 @@
 # URLShortener
 
-  Lightweight compact browser independent URL shortener written in pure JavaScript. Both front and back end use [ECMAScript 5](https://www.ecma-international.org/ecma-262/5.1/) standard for the sake of backward compatibility. Both front and back end have no dependencies on any external libraries or frameworks. Back end works on [Node.js](https://nodejs.org/) platform.
+  Lightweight compact browser independent URL shortener written in pure JavaScript. Both front and back end use [ECMAScript 5](https://www.ecma-international.org/ecma-262/5.1/) standard for the sake of backward compatibility. Both front and back end have no dependencies on any external libraries or frameworks. Back end runs on [Node.js](https://nodejs.org/) platform.
 
   ## Features
 
@@ -8,9 +8,9 @@
   * Scalability provided by the routing system
   * Wide browser support
 
-  ## Brouser support
+  ## Browser support
 
-  * Crome
+  * Chrome
   * Firefox
   * Opera
   * Safari
