@@ -24,5 +24,5 @@
 $ node app.js
 ```
 
-  ## Diclaimer
+  ## Disclaimer
   The project database have in-memory persistence and hence is hardly appropriate for the production use. If you need stronger persistence you would probably have to add appropriate functionality to `shortener.js` module. Collaboration is highly encouraged.
