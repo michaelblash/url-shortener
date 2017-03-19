@@ -8,7 +8,7 @@ var ajax = (function() {
     var xhr = new XHR();
     var paramArr = [];
     for (var prop in obj)
-      paramArr.push(prop + "=" + encodeURIComponent(obj[prop]));
+      paramArr.push(encodeURIComponent(prop) + "=" + encodeURIComponent(obj[prop]));
     var body = paramArr.join("&");
 
     xhr.open("POST", "/", true);
@@ -43,7 +43,7 @@ var ajax = (function() {
 function checkUrl(s) {
   try {
     decodeURIComponent(s);
-  } catch(e) {
+  } catch (e) {
     return false;
   }
   if (s.match(/^[a-z]+[\w\.]*:[\/]+.+$/i)) return true;
