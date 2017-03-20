@@ -1,0 +1,25 @@
+{
+  "name": "url-shortener",
+  "version": "1.0.0",
+  "description": "Lightweight compact browser independent URL shortener written in pure JavaScript",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/michaelblash/url-shortener.git"
+  },
+  "keywords": [
+    "url",
+    "shortener",
+    "standalone",
+    "vanilla.js"
+  ],
+  "author": "MichaelB <michael414bl@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/michaelblash/url-shortener/issues"
+  },
+  "homepage": "https://github.com/michaelblash/url-shortener#readme"
+}
