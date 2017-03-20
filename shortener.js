@@ -5,23 +5,17 @@
  * to make the development easier.
  */
 
-var db = {
-  'node': 'https://nodejs.org/'
-};
+var HashTable = require('./lib/hash_table');
+var ht = new HashTable();
 
 exports.shorten = function(longURL, callback) {
-  var short = Math.floor(Math.random() * 1000000).toString(36);
-  db[short] = longURL;
-  callback(null, short);
+  var short = ht.push(longURL);
+  if (short) callback(null, short);
+  else callback(new Error('The database is full.'));
 };
 
 exports.resolve = function(shortURL, callback) {
-  var longURL;
-  try {
-    longURL = db[shortURL];
-  } catch (e) {
-    callback(e);
-    return;
-  }
-  callback(null, longURL);
+  var longURL = ht.get(shortURL);
+  if (longURL) callback(null, longURL);
+  else callback(new Error('No value for ' + shortURL + ' key'));
 };

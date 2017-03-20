@@ -7,6 +7,7 @@
   * No need to install any exernal libraries and frameworks
   * Scalability provided by the routing system
   * Wide browser support
+  * Multilanguage URLs support
 
   ## Browser support
 

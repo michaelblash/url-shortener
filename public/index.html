@@ -32,7 +32,8 @@
     event = event || window.event;
     if(event.preventDefault) event.preventDefault();
     else event.returnValue = false;
-    var inputVal = this.url.value;
+    var inputField = this.url;
+    var inputVal = inputField.value;
 
     // check if IE9-
     if (!("required" in document.createElement("input"))) {
@@ -52,6 +53,7 @@
         return;
       }
       showResult(res, resultField, "correct");
+      inputField.value = "";
     });
   };
  

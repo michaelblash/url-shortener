@@ -32,9 +32,12 @@ module.exports = function(config) {
         req.on('end', function() {
           var obj = qs.parse(body);
           shortener.shorten(obj.url, function(err, result) {
-          res.setHeader('connection', 'close');
-          res.setHeader('Access-Control-Allow-Origin', '*');
-          res.end(config.domain + '/' + result);
+            res.setHeader('connection', 'close');
+            res.setHeader('Access-Control-Allow-Origin', '*');
+            if (err) {
+              res.statusCode = 500;
+              res.end();
+            } else res.end(config.domain + '/' + result);
           });
         });
       }
