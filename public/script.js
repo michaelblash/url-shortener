@@ -5,11 +5,13 @@
 var ajax = (function() {
   var XHR = ("onload" in new XMLHttpRequest()) ? XMLHttpRequest : XDomainRequest;
   return function(obj, callback) {
-    var xhr = new XHR();
-    var paramArr = [];
-    for (var prop in obj)
-      paramArr.push(encodeURIComponent(prop) + "=" + encodeURIComponent(obj[prop]));
-    var body = paramArr.join("&");
+    var xhr = new XHR(),
+        paramArr = [],
+        prop,
+        body;
+
+    for (prop in obj) paramArr.push(encodeURIComponent(prop) + "=" + encodeURIComponent(obj[prop]));
+    body = paramArr.join("&");
 
     xhr.open("POST", "/", true);
 
@@ -55,8 +57,9 @@ function checkUrl(s) {
  * the class if exists and add it otherwise.
  */
 function toggleClass(elem, classTitle) {
-  var classList = elem.className.split(/\s+/);
-  var firstIndex = classList.indexOf(classTitle);
+  var classList = elem.className.split(/\s+/),
+      firstIndex = classList.indexOf(classTitle);
+
   if (!~firstIndex) {
     classList.push(classTitle);
   } else {

@@ -24,16 +24,16 @@
   </div>
   <script>
   
-  var formSet = document.getElementById("main-form");
-  var form = formSet.getElementsByTagName("form")[0];
-  var resultField = formSet.querySelector(".result");
+  var formSet = document.getElementById("main-form"),
+      form = formSet.getElementsByTagName("form")[0],
+      resultField = formSet.querySelector(".result");
 
   form.onsubmit = function(event) {
     event = event || window.event;
     if(event.preventDefault) event.preventDefault();
     else event.returnValue = false;
-    var inputField = this.url;
-    var inputVal = inputField.value;
+    var inputField = this.url,
+        inputVal = inputField.value;
 
     // check if IE9-
     if (!("required" in document.createElement("input"))) {
@@ -59,7 +59,10 @@
  
 // show correct/error result with a proper styling
   function showResult(text, result, stylingClass) {
-    var add = "", rem = "";
+    var add = "",
+        rem = "",
+        resultSpan;
+
     if (stylingClass == "error") {
       add = "error";
       rem = "correct";
@@ -68,7 +71,7 @@
       add = "correct";
       rem = "error";
     }
-    var resultSpan = result.getElementsByTagName("span")[0];
+    resultSpan = result.getElementsByTagName("span")[0];
     if ("textContext" in resultSpan)
       resultSpan.textContext = text;
     else if ("innerText" in resultSpan)
